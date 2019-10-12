@@ -6,25 +6,31 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script type="text/javascript">
+	var userEmail = localStorage.getItem('userEmail');
+	if(!userEmail){
+		window.location.href="login.html";
+	}
+	function logout(){
+		localStorage.clear();
+		window.location.href="login.html";
+	}
+</script>
 </head>
 <body>
+	<div style="float: right;">
+		<button type="button" onclick="logout()" class="btn btn-danger">Logout</button>
+	</div>
 <table class="table" id="table">
 	<tr>
 		<th>Sl.No</th>
+		<th>Student Profile Pic</th>
 		<th>Student Name</th>
 		<th>Student Email</th>
 		<th>Student Address</th>
 		<th>Student DOB</th>
 		<th>Student Phone Number</th>
-	</tr>
-	<tr>
-		<td>lkjhgf</td>
-		<td>lkjhgf</td>
-		<td>lkjhgf</td>
-		<td>lkjhgf</td>
-		<td>lkjhgf</td>
-
+		<th>Action</th>
 	</tr>
 </table>
 <div id="Div1">
@@ -117,6 +123,7 @@
                         $.each(obj,function(index,value){
                             table_content+="<tr>";
                             table_content+="<td>"+value.id+"</td>";
+                            table_content+="<td><img src="+value.student_profile_pic+" style='width:150px;height:150px;border:2px solid gray;border-radius:50%'></td>";
                             table_content+="<td>"+value.stu_name+"</td>";
                             table_content+="<td>"+value.stu_email+"</td>";
                             table_content+="<td>"+value.stu_address+"</td>";

@@ -19,14 +19,13 @@
 </head>
 <body>
 	<div class="container">
-		<div class="alert alert-success" id="alert-message">
+		<div class="alert alert-danger" id="alert-message">
 			
 		</div>
 		<form>
-			<input type="text" name="name" placeholder="Enter your name" class="form-control" id="name"><br><br>
 			<input type="email" name="email" placeholder="Enter your email" class="form-control" id="email"><br><br>
 			<input type="password" name="password" placeholder="Enter your password" class="form-control" id="password"><br><br>
-			<input type="button" name="submit" id="btn" value="Register" class="btn btn-info">
+			<input type="button" name="submit" id="btn" value="Login" class="btn btn-info">
 		</form>
 	</div>
 
@@ -35,15 +34,13 @@
 		$(function(){
 			$('#alert-message').hide();
 			$('#btn').click(function(){
-				var name = $('#name').val();
 				var email = $('#email').val();
 				var password = $('#password').val();
 
 				$.ajax({
-					url:"insert.php",
+					url:"verify.php",
 					type:'post',
 					data:{
-						name:name,
 						email:email,
 						password:password
 					},
@@ -51,6 +48,12 @@
 						console.log(res)
 						$('#alert-message').slideDown();
 						$('#alert-message').html(res);
+						if(res=="successfully logged in"){
+							localStorage.setItem('userEmail',email)
+							window.location.href="index.html"
+						}else{
+							localStorage.clear();
+						}
 					},
 					error:function(res){
 						console.log(res)
